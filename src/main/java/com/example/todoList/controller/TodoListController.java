@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("list")
+@RequestMapping("lists")
 //@CrossOrigin
 
 public class TodoListController {
@@ -29,8 +29,24 @@ public class TodoListController {
     }
 
     @PostMapping
-    public ArrayList<Todolist> addNewList() {
+    public Todolist setDoneToList(@RequestBody Todolist newTodoList) {
+//        this.todoListService.addToList(newTodoList);
+        return newTodoList;
+    }
 
+//    @PutMapping
+//    public Todolist setDoneToList(@RequestBody Todolist newTodoListJSON) {
+//
+//        this.todoListService.todolists.add(newTodoList);
+//        return newTodoListJSON;
+//    }
+
+
+    @DeleteMapping("{id}")
+    public Optional<Todolist> deleteList(@PathVariable long id) {
+        return this.todoListService.todolists.stream()
+                .filter(list -> list.id != id)
+                .findFirst();
     }
 
 

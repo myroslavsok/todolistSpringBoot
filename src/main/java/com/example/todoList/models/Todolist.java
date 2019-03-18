@@ -5,8 +5,7 @@ public class Todolist {
     public long id;
     public String name;
 
-    public Todolist(long id, String name) {
-        this.id = id;
+    public Todolist(String name) {
         this.name = name;
     }
 
