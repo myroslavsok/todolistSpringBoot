@@ -1,24 +1,54 @@
 package com.example.todoList.controller;
 
+import com.example.todoList.models.Todolist;
 import com.example.todoList.service.TodoListService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
-@CrossOrigin
+import java.util.ArrayList;
+import java.util.Optional;
+
+@RestController
+@RequestMapping("list")
+//@CrossOrigin
+
 public class TodoListController {
 
-//    @Autowired
-//    TodoListService todoListService;
+    private TodoListService todoListService = new TodoListService();
 
-    @GetMapping(value = "/hi")
-    @ResponseBody
-    String hi() {
-        return "test";
+
+    @GetMapping
+    public ArrayList<Todolist> getAllLists() {
+        return this.todoListService.todolists;
     }
+
+    @GetMapping("{id}")
+    public Optional<Todolist> getOneLists(@PathVariable long id) {
+         return this.todoListService.todolists.stream()
+                .filter(list -> list.id == id)
+                .findFirst();
+    }
+
+    @PostMapping
+    public ArrayList<Todolist> addNewList() {
+
+    }
+
+
+
+
+
+
+//    @GetMapping("list")
+//    @ResponseBody
+//    ArrayList<Todolist> getAllLists() {
+//        return this.todoListService.getTodolists();
+//    }
+
+//    @GetMapping(value = "list")
+//    @ResponseBody
+//    ArrayList<Todolist> getAllLists(@) {
+//        return this.todoListService.getTodolists();
+//    }
 
 
 
