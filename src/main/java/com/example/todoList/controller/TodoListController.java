@@ -1,5 +1,6 @@
 package com.example.todoList.controller;
 
+import com.example.todoList.models.Task;
 import com.example.todoList.models.Todolist;
 import com.example.todoList.repo.TodolistRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,20 +32,21 @@ public class TodoListController {
         return list.get();
     }
 
+
     @PostMapping
     public Todolist addNewList(@RequestBody Todolist list) {
         return todolistRepo.save(list);
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<Object> selectList(@RequestBody Todolist list, @PathVariable Long id) {
+    public Todolist selectList(@RequestBody Todolist list, @PathVariable Long id) {
         Optional<Todolist> listOptional = todolistRepo.findById(id);
         if (!listOptional.isPresent()) {
-            return ResponseEntity.notFound().build();
+            throw new RuntimeException();
         }
         list.setId(id);
         todolistRepo.save(list);
-        return ResponseEntity.noContent().build();
+        return list;
     }
 
     @DeleteMapping("{id}")

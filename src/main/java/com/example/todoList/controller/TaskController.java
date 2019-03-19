@@ -30,20 +30,25 @@ public class TaskController {
         return task.get();
     }
 
+    @GetMapping("list/{id}")
+    public List<Task> getTaskFromSelectedList(@PathVariable Long id) {
+        return taskRepo.findByTodolistId(id);
+    }
+
     @PostMapping
     public Task addNewTask(@RequestBody Task task) {
         return taskRepo.save(task);
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<Object> setTaskDone(@RequestBody Task task, @PathVariable Long id) {
+    public Task setTaskDone(@RequestBody Task task, @PathVariable Long id) {
         Optional<Task> taskOptional = taskRepo.findById(id);
         if (!taskOptional.isPresent()) {
-            return ResponseEntity.notFound().build();
+            throw new RuntimeException();
         }
         task.setDone(!task.getDone());
         taskRepo.save(task);
-        return ResponseEntity.noContent().build();
+        return task;
     }
 
     @DeleteMapping("{id}")

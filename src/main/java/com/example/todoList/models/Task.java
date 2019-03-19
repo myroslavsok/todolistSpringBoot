@@ -9,7 +9,7 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "todolistId")
+    @Column(name = "todolist_id")
     private Long todolistId;
 
     @Column(name = "name")
@@ -19,8 +19,7 @@ public class Task {
     private boolean done;
 
     public Task() {}
-    public Task(Long todolistId, String name, boolean done) {
-        this.id = id;
+    public Task(String name, boolean done) {
         this.todolistId = todolistId;
         this.name = name;
         this.done = done;
