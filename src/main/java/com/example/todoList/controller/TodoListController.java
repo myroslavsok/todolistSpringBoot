@@ -11,7 +11,7 @@ import java.util.Optional;
 
 
 @RestController
-@RequestMapping("/lists")
+@RequestMapping("lists")
 public class TodoListController {
 
     @Autowired
@@ -37,7 +37,7 @@ public class TodoListController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<Object> selectList(@RequestBody Todolist list, @PathVariable long id) {
+    public ResponseEntity<Object> selectList(@RequestBody Todolist list, @PathVariable Long id) {
         Optional<Todolist> listOptional = todolistRepo.findById(id);
         if (!listOptional.isPresent()) {
             return ResponseEntity.notFound().build();

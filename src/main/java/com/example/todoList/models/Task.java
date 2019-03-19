@@ -9,8 +9,8 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "listId")
-    private Long listId;
+    @Column(name = "todolistId")
+    private Long todolistId;
 
     @Column(name = "name")
     private String name;
@@ -18,24 +18,26 @@ public class Task {
     @Column(name = "done")
     private boolean done;
 
-    public Task(Long id, Long listId, String name, boolean done) {
+    public Task() {}
+    public Task(Long todolistId, String name, boolean done) {
         this.id = id;
-        this.listId = listId;
+        this.todolistId = todolistId;
         this.name = name;
         this.done = done;
     }
 
-    public Task() {}
-
     public Long getId() {
         return id;
     }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public Long getListId() {
-        return listId;
+        return todolistId;
     }
-    public void setListId(Long listId) {
-        this.listId = listId;
+    public void setListId(Long todolistId) {
+        this.todolistId = todolistId;
     }
 
     public String getName() {
@@ -45,7 +47,7 @@ public class Task {
         this.name = name;
     }
 
-    public boolean isDone() {
+    public boolean getDone() {
         return done;
     }
     public void setDone(boolean done) {
