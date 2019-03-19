@@ -1,71 +1,38 @@
 package com.example.todoList.controller;
 
 import com.example.todoList.models.Todolist;
+import com.example.todoList.repo.TodolistRepo;
 import com.example.todoList.service.TodoListService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Optional;
+import java.util.List;
+
+
+//@RequestMapping("lists")
+//@CrossOrigin
+//@Controller
 
 @RestController
-@RequestMapping("lists")
-//@CrossOrigin
-
+@RequestMapping("/lists")
 public class TodoListController {
 
-    private TodoListService todoListService = new TodoListService();
+    @Autowired
+    private TodolistRepo todolistRepo;
 
+    private TodoListService todoListService;
 
-    @GetMapping
-    public ArrayList<Todolist> getAllLists() {
-        return this.todoListService.todolists;
+    public TodoListController() {
     }
 
-    @GetMapping("{id}")
-    public Optional<Todolist> getOneLists(@PathVariable long id) {
-         return this.todoListService.todolists.stream()
-                .filter(list -> list.id == id)
-                .findFirst();
+    @GetMapping
+    public List<Todolist> findAllLists() {
+        return todolistRepo.findAll();
     }
 
     @PostMapping
-    public Todolist setDoneToList(@RequestBody Todolist newTodoList) {
-//        this.todoListService.addToList(newTodoList);
-        return newTodoList;
+    public Todolist add(@RequestBody Todolist list) {
+        return todolistRepo.save(list);
     }
-
-//    @PutMapping
-//    public Todolist setDoneToList(@RequestBody Todolist newTodoListJSON) {
-//
-//        this.todoListService.todolists.add(newTodoList);
-//        return newTodoListJSON;
-//    }
-
-
-    @DeleteMapping("{id}")
-    public Optional<Todolist> deleteList(@PathVariable long id) {
-        return this.todoListService.todolists.stream()
-                .filter(list -> list.id != id)
-                .findFirst();
-    }
-
-
-
-
-
-
-//    @GetMapping("list")
-//    @ResponseBody
-//    ArrayList<Todolist> getAllLists() {
-//        return this.todoListService.getTodolists();
-//    }
-
-//    @GetMapping(value = "list")
-//    @ResponseBody
-//    ArrayList<Todolist> getAllLists(@) {
-//        return this.todoListService.getTodolists();
-//    }
-
-
 
 }

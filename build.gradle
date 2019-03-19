@@ -1,3 +1,16 @@
+//buildscript {
+//	ext {
+//		springBootVersion = '1.5.3.RELEASE'
+//	}
+//	repositories {
+//		mavenCentral()
+//	}
+//	dependencies {
+//		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+//		classpath("org.postgresql:postgresql:9.4-1206-jdbc42")
+//	}
+//}
+
 plugins {
 	id 'org.springframework.boot' version '2.1.3.RELEASE'
 	id 'java'
@@ -18,11 +31,30 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	runtimeOnly 'org.springframework.boot:spring-boot-devtools'
-	implementation('org.springframework.boot:spring-boot-starter-data-jpa')
-	implementation('org.postgresql:postgresql')
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	compile('org.springframework.boot:spring-boot-starter')
+	compile 'org.springframework.boot:spring-boot-starter-web'
+	compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+	runtime 'org.postgresql:postgresql:9.4-1206-jdbc42'
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+
+//	compile("org.springframework.boot:spring-boot-starter-web")
+//	// JPA Data (We are going to use Repositories, Entities, Hibernate, etc...)
+//	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+//	compile(group: 'org.postgresql', name: 'postgresql', version: '42.0.0')
+//	testCompile('org.springframework.boot:spring-boot-starter-test')
+
+//	compile("org.postgresql:postgresql:9.2-1003-jdbc4")
+
+	// Use MySQL Connector-J
+//	compile 'org.postgresql:postgresql'
+
+//	implementation 'org.springframework.boot:spring-boot-starter-web'
+//	runtimeOnly 'org.springframework.boot:spring-boot-devtools'
+//	implementation('org.springframework.boot:spring-boot-starter-data-jpa')
+//	implementation('org.postgresql:postgresql')
+//	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
 //	compileOnly 'org.projectlombok:lombok:1.18.6'
 //	annotationProcessor 'org.projectlombok:lombok:1.18.6'
 }

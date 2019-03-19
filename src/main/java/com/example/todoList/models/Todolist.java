@@ -1,32 +1,44 @@
 package com.example.todoList.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name="todolists")
 public class Todolist {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
+    @Column(name = "name")
     private String name;
 
-    public Todolist(String name) {
+    @Column(name = "selected")
+    private boolean selected;
+
+    public Todolist() {}
+    public Todolist(String name, boolean selected) {
         this.name = name;
+        this.selected = selected;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+    public Integer getId() {
+        return id;
     }
 
     public void setName(String text) {
         this.name = text;
     }
-
-
-    public Integer getId() {
-        return id;
-    }
-
     public String getName() {
         return name;
+    }
+
+    public boolean getSelected() {
+        return selected;
+    }
+    public void setSelected(boolean selected) {
+        this.selected = selected;
     }
 }
