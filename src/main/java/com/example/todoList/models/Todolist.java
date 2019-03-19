@@ -3,7 +3,7 @@ package com.example.todoList.models;
 import javax.persistence.*;
 
 @Entity
-@Table(name="todolists")
+@Table(name = "todolists")
 public class Todolist {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
