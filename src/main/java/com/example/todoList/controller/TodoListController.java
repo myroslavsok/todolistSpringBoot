@@ -38,12 +38,8 @@ public class TodoListController {
         return todolistRepo.save(list);
     }
 
-    @PutMapping("{id}")
+    @PatchMapping("{id}")
     public Todolist selectList(@RequestBody Todolist list, @PathVariable Long id) {
-        Optional<Todolist> listOptional = todolistRepo.findById(id);
-        if (!listOptional.isPresent()) {
-            throw new RuntimeException();
-        }
         list.setId(id);
         todolistRepo.save(list);
         return list;

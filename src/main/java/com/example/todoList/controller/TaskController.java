@@ -40,13 +40,9 @@ public class TaskController {
         return taskRepo.save(task);
     }
 
-    @PutMapping("{id}")
+    @PatchMapping("{id}")
     public Task setTaskDone(@RequestBody Task task, @PathVariable Long id) {
-        Optional<Task> taskOptional = taskRepo.findById(id);
-        if (!taskOptional.isPresent()) {
-            throw new RuntimeException();
-        }
-        task.setDone(!task.getDone());
+        task.setId(id);
         taskRepo.save(task);
         return task;
     }
