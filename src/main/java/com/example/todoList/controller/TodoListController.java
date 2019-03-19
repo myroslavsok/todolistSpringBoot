@@ -2,16 +2,13 @@ package com.example.todoList.controller;
 
 import com.example.todoList.models.Todolist;
 import com.example.todoList.repo.TodolistRepo;
-import com.example.todoList.service.TodoListService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
-
-//@RequestMapping("lists")
-//@CrossOrigin
-//@Controller
 
 @RestController
 @RequestMapping("/lists")
@@ -20,19 +17,39 @@ public class TodoListController {
     @Autowired
     private TodolistRepo todolistRepo;
 
-    private TodoListService todoListService;
-
-    public TodoListController() {
-    }
-
     @GetMapping
-    public List<Todolist> findAllLists() {
+    public List<Todolist> getAllLists() {
         return todolistRepo.findAll();
     }
 
+    @GetMapping("{id}")
+    public Todolist getListById(@PathVariable Long id) {
+        Optional<Todolist> list = todolistRepo.findById(id);
+        if (!list.isPresent()) {
+            throw new RuntimeException();
+        }
+        return list.get();
+    }
+
     @PostMapping
-    public Todolist add(@RequestBody Todolist list) {
+    public Todolist addNewList(@RequestBody Todolist list) {
         return todolistRepo.save(list);
+    }
+
+    @PutMapping("{id}")
+    public ResponseEntity<Object> selectList(@RequestBody Todolist list, @PathVariable long id) {
+        Optional<Todolist> listOptional = todolistRepo.findById(id);
+        if (!listOptional.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+        list.setId(id);
+        todolistRepo.save(list);
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("{id}")
+    public void deleteList(@PathVariable Long id) {
+        todolistRepo.deleteById(id);
     }
 
 }
