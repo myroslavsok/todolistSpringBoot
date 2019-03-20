@@ -2,6 +2,7 @@ package com.example.todoList.controller;
 
 import com.example.todoList.models.Task;
 import com.example.todoList.models.Todolist;
+import com.example.todoList.repo.TaskRepo;
 import com.example.todoList.repo.TodolistRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,10 +14,13 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("lists")
+@CrossOrigin(origins = "http://localhost:4200")
 public class TodoListController {
 
     @Autowired
     private TodolistRepo todolistRepo;
+    @Autowired
+    private TaskRepo taskRepo;
 
     @GetMapping
     public List<Todolist> getAllLists() {
@@ -47,6 +51,7 @@ public class TodoListController {
 
     @DeleteMapping("{id}")
     public void deleteList(@PathVariable Long id) {
+        taskRepo.deleteTaskByTodolistId(id);
         todolistRepo.deleteById(id);
     }
 
