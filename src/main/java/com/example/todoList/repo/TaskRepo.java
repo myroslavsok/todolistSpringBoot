@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface TaskRepo extends JpaRepository<Task, Long> {
     List<Task> findByTodolistId(Long id);
+//    List<Task> findByDoneFalse(Long id);
+
 }

@@ -12,13 +12,13 @@ public class Todolist {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "selected")
-    private boolean selected;
+    @Column(name = "pin")
+    private boolean pin;
 
     public Todolist() {}
-    public Todolist(String name, boolean selected) {
+    public Todolist(String name, boolean pin) {
         this.name = name;
-        this.selected = selected;
+        this.pin = pin;
     }
 
     public void setId(Long id) {
@@ -35,10 +35,10 @@ public class Todolist {
         return name;
     }
 
-    public boolean getSelected() {
-        return selected;
+    public boolean getPin() {
+        return pin;
     }
-    public void setSelected(boolean selected) {
-        this.selected = selected;
+    public void setPin(boolean pin) {
+        this.pin = pin;
     }
 }

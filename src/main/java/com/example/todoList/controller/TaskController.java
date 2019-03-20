@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("tasks")
@@ -35,13 +36,21 @@ public class TaskController {
         return taskRepo.findByTodolistId(id);
     }
 
+    @GetMapping("list/{id}/false")
+    public List<Task> getUndoneTasksFromSelectedList(@PathVariable Long id) {
+        return taskRepo.findByTodolistId(id)
+                .stream()
+                .filter(task -> !task.getDone())
+                .collect(Collectors.toList());
+    }
+
     @PostMapping
     public Task addNewTask(@RequestBody Task task) {
         return taskRepo.save(task);
     }
 
     @PatchMapping("{id}")
-    public Task setTaskDone(@RequestBody Task task, @PathVariable Long id) {
+    public Task renameTask(@RequestBody Task task, @PathVariable Long id) {
         task.setId(id);
         taskRepo.save(task);
         return task;
