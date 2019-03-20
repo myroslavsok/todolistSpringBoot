@@ -3,7 +3,6 @@ package com.example.todoList.controller;
 import com.example.todoList.models.Task;
 import com.example.todoList.repo.TaskRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -37,12 +36,12 @@ public class TaskController {
         return taskRepo.findByTodolistId(id);
     }
 
-    @GetMapping("list/{id}/false")
-    public List<Task> getUndoneTasksFromSelectedList(@PathVariable Long id) {
-        return taskRepo.findByTodolistId(id)
-                .stream()
-                .filter(task -> !task.getDone())
-                .collect(Collectors.toList());
+    @GetMapping("false")
+    public List<Task> getUndoneTasksFromList() {
+        return taskRepo.findAll()
+                    .stream()
+                    .filter(task -> !task.getDone())
+                    .collect(Collectors.toList());
     }
 
     @PostMapping

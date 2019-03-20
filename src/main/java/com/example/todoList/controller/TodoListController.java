@@ -1,11 +1,9 @@
 package com.example.todoList.controller;
 
-import com.example.todoList.models.Task;
 import com.example.todoList.models.Todolist;
 import com.example.todoList.repo.TaskRepo;
 import com.example.todoList.repo.TodolistRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -36,7 +34,6 @@ public class TodoListController {
         return list.get();
     }
 
-
     @PostMapping
     public Todolist addNewList(@RequestBody Todolist list) {
         return todolistRepo.save(list);
@@ -54,5 +51,4 @@ public class TodoListController {
         taskRepo.deleteTaskByTodolistId(id);
         todolistRepo.deleteById(id);
     }
-
 }
