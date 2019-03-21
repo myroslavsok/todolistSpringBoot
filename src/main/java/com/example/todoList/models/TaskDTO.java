@@ -3,6 +3,9 @@ package com.example.todoList.models;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TaskDTO {
     @Id
@@ -47,6 +50,18 @@ public class TaskDTO {
         this.name = name;
         this.done = done;
         this.listId = listId;
+    }
+
+    static public class Transffering {
+        public static List<TaskDTO> transferTasksToTaskDTOs(List<Task> tasks) {
+            List<TaskDTO> taskDTOs = new ArrayList<TaskDTO>();
+            tasks.forEach(task -> {
+                Long listId = task.getTodolist().getId();
+                TaskDTO newTaskDTO = new TaskDTO(task.getId(), task.getName(), task.getDone(), listId);
+                taskDTOs.add(newTaskDTO);
+            });
+            return taskDTOs;
+        }
     }
 
 }

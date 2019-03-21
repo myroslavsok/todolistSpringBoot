@@ -4,15 +4,6 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-public class Todolist {
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
-    private String name;
-
-    private boolean pin;
-
 //    @OneToMany(mappedBy = "todolist",cascade = CascadeType.ALL, orphanRemoval = true)
 //    private List<Task> tasks = new ArrayList<>();
 //public void setTasks(ArrayList<Task> tasks) {
@@ -21,6 +12,15 @@ public class Todolist {
 //    public List<Task> getTasks() {
 //        return tasks;
 //    }
+
+@Entity
+public class Todolist {
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    private String name;
+
+    private boolean pin;
 
     public Todolist() {}
 

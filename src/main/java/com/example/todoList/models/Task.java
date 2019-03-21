@@ -11,9 +11,6 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-//    @Column(name = "todolist_id")
-//    private Long todolistId;
-
     private String name;
 
     private boolean done;
@@ -47,13 +44,6 @@ public class Task {
     public void setId(Long id) {
         this.id = id;
     }
-
-//    public Long getListId() {
-//        return todolistId;
-//    }
-//    public void setListId(Long todolistId) {
-//        this.todolistId = todolistId;
-//    }
 
     public String getName() {
         return name;
