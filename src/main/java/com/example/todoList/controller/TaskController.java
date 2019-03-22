@@ -53,16 +53,6 @@ public class TaskController {
         return TaskDTO.Transffering.transferTasksToTaskDTOs(tasks);
     }
 
-    // Preview
-    @GetMapping("false")
-    public List<Task> getUndoneTasksFromList() {
-
-        return taskRepo.findAll()
-                .stream()
-                .filter(task -> !task.getDone())
-                .collect(Collectors.toList());
-    }
-
     @PostMapping
     public Task addNewTask(@RequestBody TaskDTO taskDTO) throws Exception {
         Todolist list = todolistRepo.findById(taskDTO.getListId()).orElseThrow(Exception::new);
