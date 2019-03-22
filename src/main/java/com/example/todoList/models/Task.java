@@ -1,5 +1,6 @@
 package com.example.todoList.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -18,6 +19,7 @@ public class Task {
 //@NotNull
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "todolist_id")
+    @JsonIgnore
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Todolist todolist;
     public Todolist getTodolist() {

@@ -8,9 +8,7 @@ import com.example.todoList.repo.TodolistRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -37,10 +35,16 @@ public class TaskController {
         return TaskDTO.Transffering.transferTasksToTaskDTOs(tasks);
     }
 
+
 //    @GetMapping("{id}")
 //    public Task getTaskById(@PathVariable Long id) throws Exception {
 //        Task task = this.taskRepo.findById(id).orElseThrow(Exception::new);
 //        return task;
+//    }
+
+//    @GetMapping("allUndone")
+//    public List<Task> getListsWithUndoneTasks() {
+//        return taskRepo.findAllTasks();
 //    }
 
     @GetMapping("list/{id}")
@@ -49,12 +53,14 @@ public class TaskController {
         return TaskDTO.Transffering.transferTasksToTaskDTOs(tasks);
     }
 
+    // Preview
     @GetMapping("false")
     public List<Task> getUndoneTasksFromList() {
+
         return taskRepo.findAll()
-                    .stream()
-                    .filter(task -> !task.getDone())
-                    .collect(Collectors.toList());
+                .stream()
+                .filter(task -> !task.getDone())
+                .collect(Collectors.toList());
     }
 
     @PostMapping
