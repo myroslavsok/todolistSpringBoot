@@ -48,7 +48,6 @@ public class TodoListController {
 
     @DeleteMapping("{id}")
     public void deleteList(@PathVariable Long id) {
-//        taskRepo.deleteTaskByTodolistId(id);
         todolistRepo.deleteById(id);
     }
 

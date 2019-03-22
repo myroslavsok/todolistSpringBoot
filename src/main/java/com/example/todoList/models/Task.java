@@ -13,14 +13,11 @@ public class Task {
     private Long id;
 
     private String name;
-
     private boolean done;
 
-//@NotNull
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "todolist_id")
     @JsonIgnore
-    @OnDelete(action = OnDeleteAction.CASCADE)
     private Todolist todolist;
     public Todolist getTodolist() {
         return todolist;

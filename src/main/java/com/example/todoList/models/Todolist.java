@@ -1,18 +1,7 @@
 package com.example.todoList.models;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
-
-//    @OneToMany(mappedBy = "todolist",cascade = CascadeType.ALL, orphanRemoval = true)
-//    private List<Task> tasks = new ArrayList<>();
-//public void setTasks(ArrayList<Task> tasks) {
-//    this.tasks = tasks;
-//}
-//    public List<Task> getTasks() {
-//        return tasks;
-//    }
 
 @Entity
 public class Todolist {
@@ -22,10 +11,6 @@ public class Todolist {
     private String name;
 
     private boolean pin;
-
-//    @OneToMany(mappedBy = "todolist",cascade = CascadeType.ALL, orphanRemoval = true)
-//    @JoinColumn(name = "tasks")
-//    private List<Task> tasks = new ArrayList<>();
 
     @OneToMany(mappedBy="todolist", cascade = CascadeType.ALL)
     private Set<Task> tasks;
@@ -43,6 +28,7 @@ public class Todolist {
     public void setName(String text) {
         this.name = text;
     }
+
     public String getName() {
         return name;
     }
@@ -50,6 +36,7 @@ public class Todolist {
     public boolean getPin() {
         return pin;
     }
+
     public void setPin(boolean pin) {
         this.pin = pin;
     }

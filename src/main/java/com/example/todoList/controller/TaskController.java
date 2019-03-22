@@ -9,20 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("tasks")
 @CrossOrigin(origins = "http://localhost:4200")
 public class TaskController {
-
-//    @Resource(name="sessionFactory")
-//    private SessionFactory sessionFactory;
-//    patch
-//        // Retrieve session from Hibernate
-//        Session session = sessionFactory.getCurrentSession();
-//        // Retrieve existing person via id
-//        Task existingPerson = (Task) session.get(Task.class, Task.getId());
 
     @Autowired
     private TaskRepo taskRepo;
@@ -34,18 +25,6 @@ public class TaskController {
         List<Task> tasks = taskRepo.findAll();
         return TaskDTO.Transffering.transferTasksToTaskDTOs(tasks);
     }
-
-
-//    @GetMapping("{id}")
-//    public Task getTaskById(@PathVariable Long id) throws Exception {
-//        Task task = this.taskRepo.findById(id).orElseThrow(Exception::new);
-//        return task;
-//    }
-
-//    @GetMapping("allUndone")
-//    public List<Task> getListsWithUndoneTasks() {
-//        return taskRepo.findAllTasks();
-//    }
 
     @GetMapping("list/{id}")
     public List<TaskDTO> getTaskFromSelectedList(@PathVariable Long id) {
@@ -71,4 +50,5 @@ public class TaskController {
     public void deleteTask(@PathVariable Long id) {
         taskRepo.deleteById(id);
     }
+
 }
