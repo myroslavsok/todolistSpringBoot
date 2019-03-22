@@ -38,13 +38,19 @@ public class TaskController {
         return taskRepo.save(new Task(taskDTO.getListId(), taskDTO.getName(), taskDTO.getDone(), list));
     }
 
-    @PatchMapping("{id}")
-    public TaskDTO renameTask(@RequestBody TaskDTO taskDTO, @PathVariable Long id) throws Exception {
-        Todolist list = this.todolistRepo.findById(taskDTO.getListId()).orElseThrow(Exception::new);
-        Task task = new Task(id, taskDTO.getName(), taskDTO.getDone(), list);
+    @PatchMapping
+    public TaskDTO editTask(@RequestBody TaskDTO taskDTO) throws Exception {
+        Task task = taskRepo.findById(taskDTO.getId()).orElseThrow(Exception::new);
+        if (taskDTO.getName() != null) {
+            task.setName(taskDTO.getName());
+        }
+        if (taskDTO.getDone() != null) {
+            task.setDone(taskDTO.getDone());
+        }
         taskRepo.save(task);
-        return new TaskDTO(task.getId(), task.getName(), task.getDone(), list.getId());
+        return taskDTO;
     }
+
 
     @DeleteMapping("{id}")
     public void deleteTask(@PathVariable Long id) {
